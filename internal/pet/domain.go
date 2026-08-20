@@ -146,10 +146,7 @@ type Page[T any] struct {
 }
 
 func (p Principal) CanManageUsers() bool {
-	if p.UserID == 0 {
-		return false
-	}
-	return true
+	return p.UserID != 0 && p.Role == RoleAdmin
 }
 
 type Principal struct {
