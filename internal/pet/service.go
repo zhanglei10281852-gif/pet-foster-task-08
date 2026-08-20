@@ -209,7 +209,7 @@ func (s *Service) UpdateUser(ctx context.Context, principal Principal, input Use
 }
 
 func (s *Service) ListUsers(ctx context.Context, principal Principal, pageNum, pageSize int, username, phone, role string) (Page[User], error) {
-	if !principal.CanManageUsers() {
+	if principal.Role != RoleAdmin {
 		return Page[User]{}, ErrForbidden
 	}
 	pageNum, pageSize = normalizePage(pageNum, pageSize)
